@@ -16,12 +16,10 @@ OPversion=$(lsb_release -d -s)
 
 
 #This command shows ip address of the device.
-#We used grep command to select the line containing ip address and awk command to select the word from the line by passing it through the pipeline.
 ipaddress=$(ip a s ens33 | grep -w inet | awk '{print $2}')
 
 
 #This command shows the amount of free space available in root filesystem.
-#We used df command to display the disc usage, tail to select the last line, and awk to get only the required data.
 filesystemfreespace=$(df -h /dev/sda3 | tail -1 | awk '{print $4}')
 
 
