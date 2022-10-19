@@ -47,7 +47,7 @@ done
 #####
 [ "$verbose" = "yes" ] && echo "Gathering host information"
 # we use the hostname command to get our system name and main ip address
-myhostname="$(hostname) / $(hostname -I)"
+my_hostname="$(hostname) / $(hostname -I)"
 
 [ "$verbose" = "yes" ] && echo "Identifying default route"
 # the default route can be found in the route table normally
@@ -63,7 +63,7 @@ external_name=$(getent hosts $external_address | awk '{print $2}')
 cat <<EOF
 System Identification Summary
 =============================
-Hostname      : $myhostname
+Hostname      : $my_hostname
 Default Router: $default_router_address
 Router Name   : $default_router_name
 External IP   : $external_address
