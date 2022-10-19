@@ -1,3 +1,6 @@
+#!/bin/bash
+
+#Installing lxd if it is not installed.
 which lxd > /dev/null
 if [ $? -ne 0 ]; then
 
@@ -10,7 +13,7 @@ if [ $? -ne 0 ]; then
 	fi
 fi
 
-
+#Creating lxdbr0 interface if it is not found.
 ls /sys/class/net | grep -w "lxdbr0" > /dev/null
 
 if [ $? -ne 0 ]; then
@@ -23,7 +26,7 @@ if [ $? -ne 0 ]; then
 	fi
 fi
 
-
+#Launching a container running Ubuntu server named COMP2101-S22 if it is not found.
 lxc list | grep -w "COMP2101-S22" > /dev/null
 
 if [ $? -ne 0 ]; then
@@ -38,7 +41,7 @@ if [ $? -ne 0 ]; then
 		sleep 10
 	done
 fi
-
+#Adding the name COMP2101-S22 with the container’s IP address in /etc/hosts if it is not there.
 
 grep -w "COMP2101-S22" /etc/hosts > /dev/null
 
@@ -56,7 +59,7 @@ if [ $? -ne 0 ]; then
 	fi
 fi
 
-
+#Installing Apache2 in container if it is not installed.
 lxc exec COMP2101-S22 -- which apache2 > /dev/null
 
 if [ $? -ne 0 ]; then
@@ -69,7 +72,7 @@ if [ $? -ne 0 ]; then
 	fi
 fi
 
-
+#Installing curl if it is not there.
 which curl > /dev/null
 # if not then it installs it
 if [ $? -ne 0 ]; then
@@ -80,7 +83,7 @@ if [ $? -ne 0 ]; then
 		exit 1
 	fi
 fi
-
+#Retrieving information from web service and notyfying the user about success or failure.
 
 echo "Checking default web page retrival from container COMP2101-S22"
 curl http://COMP2101-S22 > /dev/null
